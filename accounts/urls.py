@@ -15,7 +15,7 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path('contact/', views.contact, name="contact"),
     path('discover/',views.discover, name="discover"),
-    path('package/',views.packagedesc, name="package"),
+    path('package/<title>/',views.packagedesc, name="package"),
 
 ]
 

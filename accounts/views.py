@@ -292,9 +292,46 @@ def discover(request):
     except:    
         return render(request, 'accounts/discover.html',context )
 
-def packagedesc(request):
-    
-    return render(request, 'accounts/package.html')
+def packagedesc(request, title='Maldives'):
+    Tours = firedb.collection(u'TOURS').stream()
+    latest_tours = firedb.collection(u'TOP_TOURS').stream()
+    tour={}
+    latesttours=[]
+    for doc in latest_tours:
+        latesttour = {}
+        latesttour['img'] = doc.to_dict()['icon']
+        latesttour['price']=doc.to_dict()['price']
+        latesttour['title']=doc.to_dict()['title']
+        latesttours.append(latesttour)
+    for doc in Tours:
+        if doc.to_dict()['product_title']==title:
+            tour['title']=title
+            tour['imagecount']=doc.to_dict()['no_of_product_images']
+            tour['price']=doc.to_dict()['price']
+            tour['desc']=doc.to_dict()['product_description']
+            tourimages=[]
+            for i in range(1,int(tour['imagecount'])+1):
+                name='product_image_'+ str(i)
+                img = doc.to_dict()[name]
+                tourimages.append(img)
+            tour['tourimages']=tourimages
+            tour['latesttours']=latesttours
+    try:
+        idtoken = request.session['uid']
+        user = auth.get_account_info(idtoken)
+        user = user['users'][0]['localId']
+        email = database.child("users").child(user).child('email').get().val()
+        fullname = database.child('users').child(user).child('full_name').get().val()
+        profileurl=storage.child("images/profile/"+user).get_url(None)
+        if profileurl==None:
+            profileurl="https://github.com/danishlaeeq/Facebook-Style-Profile-Dropdown-Menu/blob/main/assets/img/user2.jpg?raw=true"
+        if email!= None:
+            tour['email']=email
+            tour['fullname']=fullname
+            tour['profileurl']=profileurl
+        return render(request, 'accounts/package.html',tour)    
+    except:
+        return render(request, 'accounts/package.html',tour)
      
     
     
