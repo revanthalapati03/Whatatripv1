@@ -1,0 +1,78 @@
+
+{%  extends 'accounts/main.html' %}
+
+{% load static %}
+    
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="{% static '/assets/css/loginstyles.css' %}">
+<link rel="stylesheet" href="{% static '/assets/css/styles.css' %}">
+
+<style>
+    #header{
+        position: relative;
+    }
+    .nav__item a{
+        color: black;
+    }
+    .nav__item a :hover{
+        color: black;
+    }
+    .nav__link:hover{
+        color: black;
+    }
+
+</style>
+
+<div class="container">
+    <div class="login signup">
+       <div class="container">
+            <h1>Sign Up</h1>
+            <form method="POST" action="" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <input type="text" placeholder="Full Name" required name="fullname">
+                <input type="email" placeholder="Email" required name="email">
+                <input type="text" placeholder="Pnone number" required name="phone">
+                <input type="password" placeholder="Password" required name="password"><br>
+                <button type="submit" value="signup">Sign Up</button>
+            </form>
+            {% if messg %}
+            <script>
+                alert('{{ messg }}');
+            </script>
+            {% endif %}
+            <div class="clearfix"></div>
+       </div>
+    </div>
+       <div class="register" style="padding: 190px 0px;">
+        <div class="container">
+            <i class="fa fa-user-plus fa-5x"></i>
+            <h2>Hello,Friend!</h2>
+            <p>Get Ready to begin a Journey With us</p>
+            <p>Already have a Account</p>
+            <a href="{% url 'login' %}"><button>Login <i class="fa fa-arrow-circle-right"></i></button></a>
+        </div>
+        </div>
+    </div>  
+    </div>
+  </div>
+  <script>
+    function validateForm() {
+        var form_fields = document.getElementsByTagName('input')
+        var name=  form_fields[1].value;
+        var email = form_fields[2].value;
+        var phone= form_fields[3].value;
+        var password = form_fields[4].value;
+        if(password.length<8){  
+        alert("Password must be at least 8 characters long.");  
+        }  
+        var numbers = /^[0-9]+$/;
+        if(password.match(numbers))
+        {
+        alert('Your password cannot be all numbers');
+        }
+        }
+  </script>
+  {% endblock %}
+  

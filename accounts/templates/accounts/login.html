@@ -1,0 +1,56 @@
+
+
+{%  extends 'accounts/main.html' %}
+
+{% load static %}
+    
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="{% static '/assets/css/loginstyles.css' %}">
+<link rel="stylesheet" href="{% static '/assets/css/styles.css' %}">
+
+<style>
+    #header{
+        position: relative;
+    }
+    .nav__item a{
+        color: black;
+    }
+    .nav__link:hover{
+        color: black;
+    }
+
+
+</style>
+<div class="container">
+    <div class="login">
+       <div class="container">
+            <h1>Log in</h1>
+            <form action="" method = "POST">
+            {% csrf_token %}
+            <input type="email" placeholder="Email" name="email">
+            <input type="password" placeholder="Password" name="password"><br>
+            <input type="checkbox"><span>Remember me</span>
+            <a href="{% url 'forgotpass' %}">Forgot password?</a>
+            <button type="submit" value="Login">log in</button>
+            </form>
+            {% if messg %}
+            <script>
+                alert('{{ messg }}');
+            </script>
+            {% endif %}
+            <div class="clearfix"></div> 
+       </div>
+    </div>
+    <div class="register">
+        <div class="container">
+            <i class="fa fa-user-plus fa-5x"></i>
+            <h2>Hello,Friend!</h2>
+            <p>Enter your personal details and start journey with us</p>
+            <a href="{% url 'register' %}"><button>Register <i class="fa fa-arrow-circle-right"></i></button></a>
+        </div>
+    </div>  
+  </div>
+</div>
+{% endblock %}

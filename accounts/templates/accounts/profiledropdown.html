@@ -1,0 +1,227 @@
+{% load static %}
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/profiledropdown.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <div class="container">
+        <div class="buttons">
+          <div class="d-flex">
+            <div id="navdrop" class="btn-light">
+              <div class="drop-btn">
+                <a id="menu" tooltipped="" href="#!">
+                  <p>{{fullname}}</p>
+                  <img src="{{profileurl}}" class="profilePicture" style="cursor: pointer !important;border-radius:100%;object-fit:cover;width:33px;height: 33px;margin-left: 1px;">
+                </a>
+              </div>
+              <div class="tooltip"></div>
+              <div class="wrapper" style="height: 385px;">
+                <ul class="menu-bar" style="margin-left: 0px;">
+                  <li class="profile-dsf3SD_02-1SAd9">
+                    <a href="#">
+                      <img src="{{profileurl}}" class="responsive-img">
+                      <div> <span id="ch_head_name"> {{email}} </span>
+                        <br> <span id="head_manage_acc"> Manage Settings </span>
+                      </div>
+                    </a>
+                  </li>
+                  <hr>
+                  <li class="feed-dsf3SD_02-1SAd9">
+                    <a href="#">
+                      <div class="icon"> <span class="material-icons">feedback</span>
+                      </div>
+                      <div> <span id="feed-title">Give Feedback</span>
+                        <br> <span id="feed-subject">Help us improve the whatatrip</span>
+                      </div>
+                    </a>
+                  </li>
+                  <hr>
+                  <li class="setting-item">
+                    <a href="javascript:void(0)">
+                      <div class="icon"> <span class="material-icons">settings</span>
+                      </div> <span>Settings &amp; privacy&nbsp;&nbsp;</span> <i class="material-icons">keyboard_arrow_right</i>
+                    </a>
+                  </li>
+                  <li class="help-item">
+                    <a href="javascript:void(0)">
+                      <div class="icon"><span class="material-icons">help</span>
+                      </div>Help &amp; support&nbsp;&nbsp;<i class="material-icons">keyboard_arrow_right</i>
+                    </a>
+                  </li>
+                  <li class="theme-item">
+                    <a href="javascript:void(0)">
+                      <div class="icon"><span class="material-icons">brightness_medium</span>
+                      </div>Display &amp; Theme&nbsp;&nbsp;<i class="material-icons">keyboard_arrow_right</i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'about' %}">
+                      <div class="icon"><span class="material-icons">group</span></span>
+                      </div>About us
+                    </a>
+                  </li>
+                </ul>
+                <ul class="theme-drop" style="display: none;">
+                  <div class="arrow"> <i class=" back-theme-btn material-icons waves-effect">arrow_back</i> <span>&nbsp;Display &amp; Theme</span>
+                  </div>
+                  <hr>
+                  <li>
+                        <div class="nav__dark">
+                        <!-- Theme change button -->
+                            <span class="change-theme-name">Dark mode</span>
+                            <i class="ri-moon-line change-theme" id="theme-button" style="color: black;">  Change Theme</i>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="setting-drop" style="display: none;">
+                  <div class="arrow"> <i class=" back-setting-btn material-icons waves-effect">arrow_back</i> <span>&nbsp;Settings &amp; Privacy</span>
+                  </div>
+                  <hr>
+                  <li>
+                    <a href="{% url 'profile' %}">
+                      <div class="icon"><span class="material-icons">account_box</span>
+                      </div>Personal info
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'resetpass' %}">
+                      <div class="icon"><span class="material-icons">lock</span>
+                      </div>change Password
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="icon"><span class="material-icons">format_list_bulleted</span>
+                      </div>Activity log
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="icon"><span class="material-icons">language</span>
+                      </div>Languages
+                    </a>
+                  </li>
+                  <li class="logout">
+                    <a href="{% url 'logout' %}">
+                      <div class="icon"><span class="material-icons">exit_to_app</span>
+                      </div>Sign out
+                    </a>
+                  </li>
+                </ul>
+                <ul class="help-drop" style="display: none;">
+                  <div class="arrow">
+                    <i class="back-help-btn material-icons waves-effect">arrow_back</i> <span>&nbsp;Help &amp; Support</span>
+                  </div>
+                  <hr>
+                  <li>
+                    <a href="#">
+                      <div class="icon">
+                        <span class="material-icons">help_outline</span>
+                      </div>Help centre
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="icon">
+                        <span class="material-icons">contact_mail</span>
+                      </div>Support Inbox
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="icon">
+                        <span class="material-icons">feedback</span>
+                      </div>Send feedback
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <div class="icon"><span class="material-icons">report</span>
+                      </div>Report problem
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+              
+<script>
+          // profile dropdown scripts
+
+
+const docBody = document.querySelector("body");
+
+// Dark DropDown Menu For Profile Button
+const btn_light = document.querySelector(".btn-light .drop-btn"),
+  light_tooltip = document.querySelector(".btn-light .tooltip"),
+  light_menu_wrapper = document.querySelector(".btn-light .wrapper"),
+  light_menu_bar = document.querySelector(".btn-light .menu-bar"),
+  light_setting_drop = document.querySelector(".btn-light .setting-drop"),
+  light_help_drop = document.querySelector(".btn-light .help-drop"),
+  light_theme_drop = document.querySelector(".btn-light .theme-drop"),
+  light_setting_item = document.querySelector(".btn-light .setting-item"),
+  light_theme_item = document.querySelector(".btn-light .theme-item"),
+  light_help_item = document.querySelector(".btn-light .help-item"),
+  light_setting_btn = document.querySelector(".btn-light .back-setting-btn"),
+  light_theme_btn = document.querySelector(".btn-light .back-theme-btn"),
+  light_help_btn = document.querySelector(".btn-light .back-help-btn");
+
+btn_light.onclick = () => {
+  light_menu_wrapper.classList.toggle("show");
+  light_tooltip.classList.toggle("show");
+  if (!$(light_menu_wrapper).is(":visible")) {
+    light_menu_bar.style.marginLeft = "0px";
+    light_setting_drop.style.display = "none";
+    light_help_drop.style.display = "none";
+    light_theme_drop.style.display = "none";
+    // menu_wrapper.style.height   = "435px";
+    light_menu_wrapper.style.height = "385px";
+  }
+};
+
+// Settings Button
+light_setting_item.onclick = () => {
+  light_menu_bar.style.marginLeft = "-350px";
+  light_menu_wrapper.style.height = "350px";
+  setTimeout(() => {
+    light_setting_drop.style.display = "block";
+  }, 100);
+};
+light_setting_btn.onclick = () => {
+  light_menu_bar.style.marginLeft = "0px";
+  light_setting_drop.style.display = "none";
+  light_menu_wrapper.style.height = "385px";
+};
+
+// Help Button
+light_help_item.onclick = () => {
+  light_menu_bar.style.marginLeft = "-350px";
+  light_menu_wrapper.style.height = "300px";
+  setTimeout(() => {
+    light_help_drop.style.display = "block";
+  }, 100);
+};
+light_help_btn.onclick = () => {
+  light_help_drop.style.display = "none";
+  light_menu_bar.style.marginLeft = "0px";
+  light_menu_wrapper.style.height = "385px";
+};
+
+// Theme Button
+light_theme_item.onclick = () => {
+  light_menu_bar.style.marginLeft = "-350px";
+  light_menu_wrapper.style.height = "200px";
+  setTimeout(() => {
+    light_theme_drop.style.display = "block";
+  }, 100);
+};
+light_theme_btn.onclick = () => {
+  light_menu_bar.style.marginLeft = "0px";
+  light_theme_drop.style.display = "none";
+  light_menu_wrapper.style.height = "385px";
+};
+// -------------------- End DOcument ----------------- >
+
+</script>
